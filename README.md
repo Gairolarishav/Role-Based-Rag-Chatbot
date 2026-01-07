@@ -76,15 +76,6 @@ source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 uv sync
 ```
 
-4. **Set up environment variables**
-```bash
-# Create .env file
-touch .env
-
-# Add your API keys
-echo "GEMINI_API_KEY=your_gemini_api_key_here" >> .env
-```
-
 ## ⚙️ Configuration
 
 Create a `.env` file in the root directory:
