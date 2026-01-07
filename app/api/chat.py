@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
-from schemas.chat import ChatRequest
-from services.rag.agent import query
+from app.schemas.chat import ChatRequest
+from app.services.rag.agent import query
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 

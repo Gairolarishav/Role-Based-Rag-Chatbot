@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 package-mode = false
-authors = ["Your Name <email@example.com>"]
+authors = ["Rishav Gairola"]
 
 [tool.poetry.dependencies]
 python = ">=3.13,<3.14"
