@@ -3,7 +3,7 @@ name = "rolebased-ai-chatbot-fintech"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = "=3.13"
 dependencies = [
     "dotenv>=0.9.9",
     "fastapi[standard]>=0.128.0",
