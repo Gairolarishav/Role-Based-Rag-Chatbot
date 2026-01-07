@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from .api import roles, users, auth,chat
-from db.init_db import init_db
+from .db.init_db import init_db
 
 app = FastAPI(title="RBAC Chatbot Backend")
 
