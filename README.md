@@ -60,7 +60,7 @@ A secure, role-based AI chatbot system that provides intelligent document questi
 
 1. **Clone the repository**
 ```bash
-git clone [https://github.com/yourusername/role-based-rag-chatbot.git](https://github.com/Gairolarishav/Role-Based-Rag-Chatbot.git)
+git clone https://github.com/Gairolarishav/Role-Based-Rag-Chatbot.git
 cd role-based-rag-chatbot
 ```
 
