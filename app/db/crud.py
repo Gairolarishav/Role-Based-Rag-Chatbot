@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from models import User, Role
+from .models import User, Role
 from app.core.security import hash_password
 
 # ROLES
