@@ -68,7 +68,7 @@ def delete_session(session_id):
 def get_roles():
     """Get all roles"""
     try:
-        url = requests.get(f"{API_BASE_URL}/roles/")
+        url = f"{API_BASE_URL}/roles/"
         response = requests.get(url)
         if response.status_code == 200:
             return response.json()
