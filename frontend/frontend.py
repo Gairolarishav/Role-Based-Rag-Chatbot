@@ -157,14 +157,14 @@ def login(username, password):
     """Login function that hits the FastAPI authentication endpoint"""
     try:
 
-        print("api url  ===", f"{API_BASE_URL}/auth/login")
+        st.write(f"{API_BASE_URL}/auth/login")
 
         response = requests.post(
             f"{API_BASE_URL}/auth/login",
             json={"username": username, "password": password},
             timeout=30
         )
-        print("response :", response.json())
+        st.write("response :", response.json())
         
         if response.status_code == 200:
             data = response.json()
