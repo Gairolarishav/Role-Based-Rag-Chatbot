@@ -2,6 +2,13 @@ import requests
 import json
 from pathlib import Path
 from datetime import datetime, timedelta
+import os
+from dotend import load_env
+
+load_env()
+
+API_BASE_URL = os.getenv("API_BASE_URL")
+
 
 # Directory for storing temporary session files
 TEMP_SESSION_DIR = Path("temp_sessions")
