@@ -7,7 +7,7 @@ from app.dependencies.db import get_db
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
 
-@router.post("/login")
+@router.post("/login/")
 def login(data: LoginRequest, db: Session = Depends(get_db)):
     print(data)
     user = get_user_by_username(db, data.username)
