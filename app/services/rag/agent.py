@@ -10,7 +10,7 @@ import json
 
 load_dotenv()
 
-faiss_path = r"E:\Gen AI Roadmap\Gen AI Projects\Rolebased_AI_Chatbot_fintech\ds-rpc-01\faiss_index"
+faiss_path = "faiss_index"
 
 llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 
