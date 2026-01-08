@@ -16,10 +16,6 @@ llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 
 embedding_model = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
 
-vector_store = FAISS.load_local(
-    faiss_path, embedding_model, allow_dangerous_deserialization=True
-)
-
 # -----------------------------
 # Request & Response Schemas
 # -----------------------------
@@ -32,6 +28,9 @@ class ChatRequest(BaseModel):
 def rag_tool(query:str,user_role:str):
     print(f"🔍 RAG Tool invoked for role: {user_role} and query: {query}")
     try:
+        vector_store = FAISS.load_local(
+            faiss_path, embedding_model, allow_dangerous_deserialization=True
+        )
         # Document retrieval based on role
         if "c-levelexecutives" in user_role:
             retrieved_docs = vector_store.similarity_search(
