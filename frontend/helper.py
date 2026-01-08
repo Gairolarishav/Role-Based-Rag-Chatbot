@@ -68,7 +68,7 @@ def delete_session(session_id):
 def get_roles():
     """Get all roles"""
     try:
-        url = "https://role-based-rag-chatbot.onrender.com/roles/"
+        url = requests.get(f"{API_BASE_URL}/roles/")
         response = requests.get(url)
         if response.status_code == 200:
             return response.json()
@@ -85,9 +85,8 @@ def chat_api_call_stream(message, user_role):
         }
         
         response = requests.post(
-            "https://role-based-rag-chatbot.onrender.com/chat/",
+            f"{API_BASE_URL}/chat/",
             json=payload,
-            stream=False,
             timeout=60
         )
         
@@ -118,9 +117,9 @@ def create_user(username, password, role):
         }
         
         response = requests.post(
-            "https://role-based-rag-chatbot.onrender.com/users/",
+            f"{API_BASE_URL}/users/",
             json=payload,
-            timeout=30
+            timeout=60
         )
 
         data = response.json()
@@ -144,10 +143,10 @@ def create_role(name, description):
             "description": description
         }
         
-        response = requests.post(
-            "https://role-based-rag-chatbot.onrender.com/roles/",
+       response = requests.post(
+            f"{API_BASE_URL}/roles/",
             json=payload,
-            timeout=30
+            timeout=60
         )
 
         data = response.json()
