@@ -4,7 +4,7 @@ from pathlib import Path
 from datetime import datetime, timedelta
 
 # Directory for storing temporary session files
-TEMP_SESSION_DIR = Path(r"E:\Gen AI Roadmap\Gen AI Projects\Rolebased_AI_Chatbot_fintech\ds-rpc-01\temp_sessions")
+TEMP_SESSION_DIR = Path("temp_sessions")
 TEMP_SESSION_DIR.mkdir(exist_ok=True)
 
 # Session timeout (in minutes) - sessions older than this will be auto-deleted
