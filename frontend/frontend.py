@@ -381,42 +381,65 @@ def render_document_upload():
         return
     
     st.title("📁 Document Upload")
-    
-    col1, col2 = st.columns([2, 1])
-    roles = [role["name"] for role in get_roles()]
 
-    with col1:
-        st.subheader("Upload Document")
-        uploaded_file = st.file_uploader(
-            "Choose a file",
-            type=["pdf", "txt", "docx", "csv", "xlsx"],
-            help="Upload documents related to your role",
-            disabled=st.session_state.is_processing
-        )
-        
-        if uploaded_file is not None:
-            st.success(f"File '{uploaded_file.name}' uploaded successfully!")
-            file_details = {
-                "Filename": uploaded_file.name,
-                "File size": f"{uploaded_file.size / 1024:.2f} KB",
-                "File type": uploaded_file.type
-            }
-            st.json(file_details)
+    roles = [role["name"] for role in get_roles()]
     
-    with col2:
-        st.subheader("Select Role")
-        document_role = st.selectbox(
-            "Assign document to role",
-            roles,
-            help="Select which role should have access to this document",
-            disabled=st.session_state.is_processing
-        )
-        
-        if st.button("Save Document", use_container_width=True, disabled=st.session_state.is_processing):
-            if uploaded_file is not None:
-                st.success(f"Document saved for role: {document_role}")
-            else:
-                st.warning("Please upload a file first")
+    # 🔑 Initialize uploader key
+    if "upload_key" not in st.session_state:
+        st.session_state.upload_key = 0
+
+    st.subheader("Upload Document")
+
+    uploaded_file = st.file_uploader(
+        "Choose a PDF file",
+        type=["pdf"],
+        key=f"file_uploader_{st.session_state.upload_key}",
+        help="Upload documents related to your role"
+    )
+
+    document_role = st.selectbox(
+        "Assign document to role",
+        roles
+    )
+
+    if st.button("Upload to Knowledge Base"):
+        if uploaded_file is None:
+            st.warning("Please upload a PDF file")
+        else:
+            with st.spinner("Uploading and processing PDF..."):
+                files = {
+                    "file": (
+                        uploaded_file.name,
+                        uploaded_file.getvalue(),
+                        "application/pdf"
+                    )
+                }
+
+                params = {
+                    "role": document_role
+                }
+
+                response = requests.post(
+                    f"{API_BASE_URL}/embeddings/ingest/",
+                    files=files,
+                    params=params,
+                    timeout=120
+                )
+
+                if response.status_code == 200:
+                    st.success("✅ PDF ingested successfully")
+                    st.json(response.json())
+
+                     # 🔥 Reset uploader & UI
+                    st.session_state.upload_key += 1
+
+                    # Optional small delay for UX
+                    time.sleep(1)
+
+                    st.rerun()
+                else:
+                    st.error("❌ Upload failed")
+                    st.text(response.text)
 
 def render_user_management():
     """Render the user management interface"""
