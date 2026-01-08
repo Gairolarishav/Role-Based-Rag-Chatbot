@@ -1,5 +1,5 @@
 from fastapi import APIRouter,UploadFile, File,HTTPException
-from app.services.rag.embeddings import create_embeddings
+# from app.services.rag.embeddings import create_embeddings
 
 
 router  = APIRouter(prefix="/embeddings",tags=["Embeddings"])
@@ -16,9 +16,9 @@ async def ingest_documents(
     # Read file bytes
     file_bytes = await file.read()
 
-    result  = create_embeddings(role,file_bytes,filename=file.filename)
+    # result  = create_embeddings(role,file_bytes,filename=file.filename)
 
     return {
         "filename": file.filename,
-        "message": result
+        # "message": result
     }
