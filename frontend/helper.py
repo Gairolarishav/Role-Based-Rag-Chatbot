@@ -3,9 +3,9 @@ import json
 from pathlib import Path
 from datetime import datetime, timedelta
 import os
-from dotend import load_env
+from dotenv import load_dotenv
 
-load_env()
+load_dotenv()
 
 API_BASE_URL = os.getenv("API_BASE_URL")
 
@@ -143,7 +143,7 @@ def create_role(name, description):
             "description": description
         }
         
-       response = requests.post(
+        response = requests.post(
             f"{API_BASE_URL}/roles/",
             json=payload,
             timeout=60
