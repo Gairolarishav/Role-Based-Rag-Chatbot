@@ -6,6 +6,12 @@ from helper import (
     save_session, delete_session, generate_session_id, 
     chat_api_call_stream, get_roles
 )
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+API_BASE_URL = os.getenv("API_BASE_URL")
 
 # Page configuration
 st.set_page_config(
@@ -151,9 +157,9 @@ def login(username, password):
     """Login function that hits the FastAPI authentication endpoint"""
     try:
         response = requests.post(
-            "http://localhost:8000/auth/login",
+            f"{API_BASE_URL}/auth/login",
             json={"username": username, "password": password},
-            timeout=5
+            timeout=30
         )
         
         if response.status_code == 200:
