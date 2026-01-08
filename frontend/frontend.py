@@ -156,15 +156,11 @@ def persist_session():
 def login(username, password):
     """Login function that hits the FastAPI authentication endpoint"""
     try:
-
-        st.write(f"{API_BASE_URL}/auth/login")
-
         response = requests.post(
             f"{API_BASE_URL}/auth/login",
             json={"username": username, "password": password},
             timeout=30
         )
-        st.write("response :", response.json())
         
         if response.status_code == 200:
             data = response.json()
