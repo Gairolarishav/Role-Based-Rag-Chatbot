@@ -11,7 +11,6 @@ python = ">=3.13,<3.14"
 dotenv = ">=0.9.9"
 fastapi = {extras = ["standard"], version = ">=0.128.0"}
 langchain-community = ">=0.4.1"
-langchain-huggingface = ">=1.2.0"
 langchain-unstructured = ">=1.0.1"
 markdown = ">=3.10"
 sentence-transformers = ">=5.2.0"
@@ -27,3 +26,6 @@ sseclient-py = ">=1.9.0"
 langchain = ">=1.2.0"
 passlib = "==1.7.4"
 bcrypt = "==3.2.2"
+dependencies = [
+    "psycopg2-binary>=2.9.11"
+]
