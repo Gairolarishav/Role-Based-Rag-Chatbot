@@ -7,10 +7,13 @@ from dotenv import load_dotenv
 from pydantic import BaseModel
 from langchain.messages import HumanMessage,AIMessage,ToolMessage
 import json
+from pathlib import Path
 
 load_dotenv()
 
-faiss_path = "faiss_index"
+base_dir = Path(__file__).resolve().parents[3]
+
+faiss_path = base_dir / "faiss_index"
 
 llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 

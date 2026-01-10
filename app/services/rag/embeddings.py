@@ -110,7 +110,10 @@ load_dotenv()
 # # -------------------------------
 # print(f"\n🎉 Successfully stored {len(all_split_docs)} documents in FAISS.")
 
-FAISS_PATH = "faiss_index"
+base_dir = Path(__file__).resolve().parents[3]
+
+FAISS_PATH = base_dir / "faiss_index"
+
 ROLE_ID_FILE = os.path.join(FAISS_PATH, "role_doc_ids.json")
 embedding_model = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
 

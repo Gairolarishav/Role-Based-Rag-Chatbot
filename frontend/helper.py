@@ -4,14 +4,17 @@ from pathlib import Path
 from datetime import datetime, timedelta
 import os
 from dotenv import load_dotenv
+from pathlib import Path
 
 load_dotenv()
 
+
 API_BASE_URL = os.getenv("API_BASE_URL")
 
+Base_dir = Path(__file__).resolve().parents[3]
 
 # Directory for storing temporary session files
-TEMP_SESSION_DIR = Path("temp_sessions")
+TEMP_SESSION_DIR = Base_dir / "temp_sessions"
 TEMP_SESSION_DIR.mkdir(exist_ok=True)
 
 # Session timeout (in minutes) - sessions older than this will be auto-deleted

@@ -1,5 +1,5 @@
 from fastapi import APIRouter,UploadFile, File,HTTPException
-from app.services.rag.embeddings import create_embeddings
+from services.rag.embeddings import create_embeddings
 
 
 router  = APIRouter(prefix="/embeddings",tags=["Embeddings"])
