@@ -1,29 +1,25 @@
-[tool.poetry]
+[project]
 name = "rolebased-ai-chatbot-fintech"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-package-mode = false
 authors = ["Rishav Gairola"]
+requires-python = ">=3.13,<3.14"
 
-[tool.poetry.dependencies]
-python = ">=3.13,<3.14"
-dotenv = ">=0.9.9"
-fastapi = {extras = ["standard"], version = ">=0.128.0"}
-langchain-community = ">=0.4.1"
-langchain-unstructured = ">=1.0.1"
-markdown = ">=3.10"
-sentence-transformers = ">=5.2.0"
-streamlit = ">=1.52.2"
-unstructured = ">=0.18.24"
-uvicorn = {extras = ["standard"], version = ">=0.40.0"}
-torch = "==2.8.0"
-pydantic = ">=2.12.5"
-langchain-google-genai = ">=4.1.2"
-faiss-cpu = ">=1.13.2"
-requests = ">=2.32.5"
-sseclient-py = ">=1.9.0"
-langchain = ">=1.2.0"
-passlib = "==1.7.4"
-bcrypt = "==3.2.2"
-psycopg2-binary = ">=2.9.11"
+dependencies = [
+  "python-dotenv>=0.9.9",
+  "fastapi[standard]>=0.128.0",
+  "langchain>=1.2.0",
+  "langchain-community>=0.4.1",
+  "langchain-unstructured>=1.0.1",
+  "langchain-google-genai>=4.1.2",
+  "markdown>=3.10",
+  "streamlit>=1.52.2",
+  "unstructured>=0.18.24",
+  "uvicorn[standard]>=0.40.0",
+  "pydantic>=2.12.5",
+  "faiss-cpu>=1.13.2",
+  "requests>=2.32.5",
+  "passlib==1.7.4",
+  "bcrypt==3.2.2",
+]
