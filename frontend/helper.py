@@ -11,7 +11,7 @@ load_dotenv()
 
 API_BASE_URL = os.getenv("API_BASE_URL")
 
-Base_dir = Path(__file__).resolve().parents[3]
+Base_dir = Path(__file__).resolve().parents[1]
 
 # Directory for storing temporary session files
 TEMP_SESSION_DIR = Base_dir / "temp_sessions"
