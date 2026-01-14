@@ -386,9 +386,10 @@ def render_document_upload():
 
     st.subheader("Upload Document")
 
-    uploaded_file = st.file_uploader(
-        "Choose a PDF file",
-        type=["pdf"],
+    uploaded_files = st.file_uploader(
+        "Choose PDF or Markdown or CSV files",
+        type=["pdf", "md", 'csv'],
+        accept_multiple_files=True,
         key=f"file_uploader_{st.session_state.upload_key}",
         help="Upload documents related to your role"
     )
@@ -399,43 +400,39 @@ def render_document_upload():
     )
 
     if st.button("Upload to Knowledge Base"):
-        if uploaded_file is None:
-            st.warning("Please upload a PDF file")
-        else:
-            with st.spinner("Uploading and processing PDF..."):
-                files = {
-                    "file": (
-                        uploaded_file.name,
-                        uploaded_file.getvalue(),
-                        "application/pdf"
+        if not uploaded_files:
+            st.warning("Please upload at least one file")
+            return
+        
+        with st.spinner("Uploading and processing documents..."):
+            files_payload = []
+
+            for file in uploaded_files:
+                files_payload.append(
+                    (
+                        "files",  # MUST match FastAPI parameter name
+                        (file.name, file.getvalue(), file.type)
                     )
-                }
-
-                params = {
-                    "role": document_role
-                }
-
-                response = requests.post(
-                    f"{API_BASE_URL}/embeddings/ingest/",
-                    files=files,
-                    params=params,
-                    timeout=120
                 )
 
-                if response.status_code == 200:
-                    st.success("✅ PDF ingested successfully")
-                    st.json(response.json())
+            response = requests.post(
+                f"{API_BASE_URL}/embeddings/ingest/",
+                files=files_payload,
+                params={"role": document_role},
+                timeout=300
+            )
 
-                     # 🔥 Reset uploader & UI
-                    st.session_state.upload_key += 1
+            if response.status_code == 200:
+                st.success("✅ Documents ingested successfully")
+                st.json(response.json())
 
-                    # Optional small delay for UX
-                    time.sleep(1)
-
-                    st.rerun()
-                else:
-                    st.error("❌ Upload failed")
-                    st.text(response.text)
+                # Reset uploader
+                st.session_state.upload_key += 1
+                time.sleep(1)
+                st.rerun()
+            else:
+                st.error("❌ Upload failed")
+                st.text(response.text)
 
 def render_user_management():
     """Render the user management interface"""
