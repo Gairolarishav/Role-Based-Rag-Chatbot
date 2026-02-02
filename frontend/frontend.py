@@ -342,10 +342,9 @@ def render_chatbot():
                     unique_sources = []
 
                     for src in sources:
-                        name = src.get("source")
-                        if name and name not in seen:
-                            seen.add(name)
-                            unique_sources.append(name)
+                        if src and src not in seen:
+                            seen.add(src)
+                            unique_sources.append(src)
 
                     final_markdown += "\n\n---\n**Sources:**\n"
                     for name in unique_sources:
